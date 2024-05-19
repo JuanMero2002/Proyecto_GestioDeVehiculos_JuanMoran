@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title></title> 
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="estilos.css">
+</head>  
+<body>
+    <form class="formulario" onsubmit="return validarRegistro()" action="datosusuario.html">
+        <h1>Registro de Vehículo</h1>
+        <div class="contenedor">
+            <div class="input-contenedor">
+                <i class="fas fa-envelope icon"></i>
+                <input type="text" id="placa" placeholder="Número de Placa">
+            </div>
+            <div class="input-contenedor">
+                <i class="fas fa-envelope icon"></i>
+                <input type="text" id="marca" placeholder="Marca de Vehículo">
+            </div>
+            <div class="input-contenedor">
+                <i class="fas fa-envelope icon"></i>
+                <input type="text" id="modelo" placeholder="Modelo de vehículo">
+            </div>
+            <div class="input-contenedor">
+                <i class="fas fa-envelope icon"></i>
+                <input type="text" id="ano" placeholder="Año del Vehiculo">
+            </div>
+            <div class="input-contenedor">
+                <i class="fas fa-envelope icon"></i>
+                <input type="text" id="color" placeholder="Color del vehículo">
+            </div>
+
+            <input type="submit" value="Siguiente" class="button">
+            <p id="mensaje"></p>
+            <p>Verifica que los datos estén correctamente ingresados. Caso contrario más adelante no podrás modificarlos</p>
+            <p>¿Quieres Volver? <a class="link" href="loginvista.html">Atrás</a></p>
+        </div>
+    </form>
+
+    <script>
+        function validarRegistro() {
+            var placa = document.getElementById("placa").value;
+            var marca = document.getElementById("marca").value;
+            var modelo = document.getElementById("modelo").value;
+            var ano = document.getElementById("ano").value;
+            var color = document.getElementById("color").value;
+
+            // Validación de placa
+            var formatoPlaca = /^[A-Za-z]{3}-\d{4}$/;
+            if (!formatoPlaca.test(placa)) {
+                document.getElementById("mensaje").innerText = "El número de placa es inválido. Debe tener tres letras seguidas de un guión y cuatro números.";
+                return false;
+            }
+
+            // Validación de año (deben ser 4 dígitos)
+            if (!(/^\d{4}$/.test(ano))) {
+                document.getElementById("mensaje").innerText = "El año del vehículo debe tener exactamente 4 dígitos.";
+                return false;
+            }
+
+            // Validación de campos vacíos
+            if (placa.trim() === "" || marca.trim() === "" || modelo.trim() === "" || ano.trim() === "" || color.trim() === "") {
+                document.getElementById("mensaje").innerText = "Por favor, completa todos los campos.";
+                return false;
+            }
+
+            // Si todas las validaciones pasan, se permite enviar el formulario
+            return true;
+        }
+    </script>
+</body>
+</html>

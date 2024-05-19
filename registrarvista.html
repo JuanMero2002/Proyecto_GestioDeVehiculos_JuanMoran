@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro</title> 
+    <meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+    <link rel="stylesheet" href="estilos.css">
+</head>  
+<body>
+    <form class="formulario" onsubmit="return validarRegistro(event)">
+        <h1>Registrate</h1>
+        <div class="contenedor">
+            <div class="input-contenedor">
+                <i class="fas fa-user icon"></i>
+                <input type="text" id="nombre" placeholder="Nombre Completo">
+            </div>
+            <div class="input-contenedor">
+                <i class="fas fa-envelope icon"></i>
+                <input type="text" id="correo" placeholder="Correo Electronico">
+            </div>
+            <div class="input-contenedor">
+                <i class="fas fa-key icon"></i>
+                <input type="password" id="contrasena" placeholder="Contraseña">
+            </div>
+            <input type="submit" value="Registrate" class="button">
+            <p id="mensaje"></p>
+            <p>Al registrarte, aceptas nuestras Condiciones de uso y Política de privacidad.</p>
+            <p>¿Ya tienes una cuenta? <a class="link" href="loginvista.html">Iniciar Sesion</a></p>
+        </div>
+    </form>
+
+    <script>
+        function validarRegistro(event) {
+            event.preventDefault(); // Previene el envío del formulario por defecto
+
+            var nombre = document.getElementById("nombre").value;
+            var correo = document.getElementById("correo").value;
+            var contrasena = document.getElementById("contrasena").value;
+            var formatoCorreo = /\S+@\S+\.\S+/;
+
+            if (nombre.trim() === "" || correo.trim() === "" || contrasena.trim() === "") {
+                document.getElementById("mensaje").innerText = "Por favor, completa todos los campos.";
+                return false;
+            }
+
+            if (!formatoCorreo.test(correo)) {
+                document.getElementById("mensaje").innerText = "El correo ingresado no tiene un formato válido.";
+                return false;
+            }
+
+            // Redirige a registroverificado.html si la validación es exitosa
+            window.location.href = "registroverificado.html";
+            return true;
+        }
+    </script>
+</body>
+</html>
